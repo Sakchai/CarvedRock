@@ -6,7 +6,7 @@ using System.Reactive.Subjects;
 
 namespace CarvedRock.Api
 {
-    public class ReviewMessageService
+    public class ReviewMessageService : IReviewMessageService
     {
         private readonly ISubject<ReviewAddedMessage> _messageStream = new ReplaySubject<ReviewAddedMessage>(1);
 

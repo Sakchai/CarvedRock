@@ -36,4 +36,8 @@
     <PackageReference Include="YesSql.Provider.SqlServer" Version="1.0.0-beta-1514" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CarvedRock.Shared\CarvedRock.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

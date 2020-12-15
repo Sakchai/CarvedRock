@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarvedRock.Api.Repositories
 {
-    public class ProductReviewRepository
+    public class ProductReviewRepository : IProductReviewRepository
     {
         private readonly CarvedRockDbContext _dbContext;
 

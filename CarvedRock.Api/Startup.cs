@@ -38,10 +38,11 @@ namespace CarvedRock.Api
 
             services
                         .AddSingleton<ISchema, CarvedRockSchema>()
-                        .AddSingleton<ReviewMessageService>()
+                        .AddSingleton<IReviewMessageService, ReviewMessageService>()
+                        .AddScoped<IProductRepository, ProductRepository>()
+                        .AddScoped<IProductReviewRepository, ProductReviewRepository>()
+                        .AddScoped<ICustomerRepository, CustomerRepository>()
                         .AddSingleton<ProductType>()
-                        .AddScoped<ProductRepository>()
-                        .AddScoped<ProductReviewRepository>()
                         .AddGraphQL((options, provider) =>
                         {
                             options.EnableMetrics = Environment.IsDevelopment();

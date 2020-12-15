@@ -6,23 +6,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarvedRock.Api.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class CustomerRepository : ICustomerRepository
     {
         private readonly CarvedRockDbContext _dbContext;
 
-        public ProductRepository(CarvedRockDbContext dbContext)
+        public CustomerRepository(CarvedRockDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Product>> GetAll()
+        public async Task<IEnumerable<Customer>> GetAll()
         {
-            return await _dbContext.Products.ToListAsync();
+            return await _dbContext.Customers.ToListAsync();
         }
 
-        public async Task<Product> GetOne(int id)
+        public async Task<Customer> GetOne(int id)
         {
-            return await _dbContext.Products.SingleOrDefaultAsync(p => p.Id == id);
+            return await _dbContext.Customers.SingleOrDefaultAsync(p => p.Id == id);
         }
     }
 }

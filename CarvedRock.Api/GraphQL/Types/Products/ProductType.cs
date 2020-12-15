@@ -8,8 +8,12 @@ namespace CarvedRock.Api.GraphQL.Types
 {
     public class ProductType: ObjectGraphType<Product>
     {
-        public ProductType(Defer<ProductReviewRepository> reviewRepository, IDataLoaderContextAccessor dataLoaderAccessor)
+        private Defer<IProductReviewRepository> _productReviewRepository;
+        public ProductType(Defer<IProductReviewRepository> reviewRepository, 
+            IDataLoaderContextAccessor dataLoaderAccessor)
         {
+            _productReviewRepository = reviewRepository;
+
             Field(t => t.Id);
             Field(t => t.Name);
             Field(t => t.Description);
@@ -18,6 +22,7 @@ namespace CarvedRock.Api.GraphQL.Types
             Field(t => t.Price);
             Field(t => t.Rating).Description("The (max 5) star customer rating");
             Field(t => t.Stock);
+
             Field<ProductTypeEnumType>("Type", "The type of product");
 
             Field<ListGraphType<ProductReviewType>>(
@@ -27,7 +32,7 @@ namespace CarvedRock.Api.GraphQL.Types
                     //var user = (ClaimsPrincipal) context.UserContext;
                     var loader =
                         dataLoaderAccessor.Context.GetOrAddCollectionBatchLoader<int, ProductReview>(
-                            "GetReviewsByProductId", reviewRepository.Value.GetForProducts);
+                            "GetReviewsByProductId", _productReviewRepository.Value.GetForProducts);
                     return loader.LoadAsync(context.Source.Id);
                 });
         }
